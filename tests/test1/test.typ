@@ -26,8 +26,8 @@
   #education-heading(
     "Scranton University", "Scranton, PA",
     "Bachelor of Arts", "Business Administration",
-    datetime(year: 1992, month: 9, day: 1),
-    datetime(year: 1998, month: 4,  day: 1)
+    datetime(year: 1998, month: 4,  day: 1),
+    gpa: "3.8/4.0"
   )[
     - Awarded “Most Determined Student” in senior year
   ]

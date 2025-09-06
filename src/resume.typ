@@ -151,6 +151,30 @@
   ]
 }
 
+// Function to display only the end date (for education)
+#let period_worked_education(end-date) = {
+  // sanity check
+  assert(type(end-date) == datetime or type(end-date) == str)
+  
+  if type(end-date) == str and end-date == "Present" {
+    end-date = datetime.today()
+  }
+
+  return [
+    #if (
+      type(end-date) == datetime and
+      (end-date.month() == datetime.today().month()) and 
+      (end-date.year() == datetime.today().year())
+    ) [
+      Present
+    ] else if type(end-date) == str [
+      #end-date
+    ] else [
+      #end-date.display("[month repr:short] [year]")
+    ]
+  ]
+}
+
 // Pretty self-explanatory.
 #let work-heading(title, company, location, start-date, end-date, body) = {
   // sanity checks
@@ -192,15 +216,22 @@
 }
 
 // Pretty self-explanatory.
-#let education-heading(institution, location, degree, major, start-date, end-date, body) = {
+#let education-heading(institution, location, degree, major, end-date, body, gpa: none) = {
   // sanity checks
-  assert.eq(type(start-date), datetime)
   assert(type(end-date) == datetime or type(end-date) == str)
+  if gpa != none {
+    assert(type(gpa) == str or type(gpa) == float or type(gpa) == int, message: "GPA must be a string, float, or integer")
+  }
 
   generic_2x2(
     (70%, 30%),
     [*#institution*], [*#location*], 
-    [#degree, #major], period_worked(start-date, end-date)
+    [#degree, #major], 
+    if gpa == none [
+      #period_worked_education(end-date)
+    ] else [
+      #box[#period_worked_education(end-date) #h(0.5em) GPA: #gpa]
+    ]
   )
   v(-0.2em)
   if body != [] {

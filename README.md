@@ -51,11 +51,22 @@ A bare-bones template to start making your resume is given below:
     "Scranton, PA",                           // location
     "Bachelor of Arts",                       // degree
     "Business Administration",                // major
-    datetime(year: 1992, month: 9, day: 1),   // start-date
-    datetime(year: 1998, month: 4,  day: 1)   // end-date
+    datetime(year: 1998, month: 4,  day: 1),  // end-date
+    gpa: "3.8/4.0"                            // optional GPA parameter
   )[
     - Awarded "Most Determined Student" in senior year
   ]
+  
+  // You can also use a numerical GPA value
+  #education-heading(
+    "Dunder Mifflin Sales Academy",
+    "Scranton, PA",
+    "Certificate",
+    "Advanced Sales Techniques",
+    datetime(year: 2000, month: 6,  day: 15),
+    gpa: 3.95
+  )[]
+  
   // More educational qualifications ... 
 ]
 
@@ -97,4 +108,3 @@ A bare-bones template to start making your resume is given below:
     - *Specialized Talents:* Karate (Black Belt), Jujitsu, Werewolf Hunting, Table Making
   ]
 ]
-```
